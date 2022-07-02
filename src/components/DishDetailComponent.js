@@ -41,7 +41,7 @@ function RenderComments({comments}){
         <h4>Comments</h4>
         <ul className="list-unstyled">              
           {commentsList}             
-        </ul>             
+        </ul>           
       </div>
     );
 
@@ -56,7 +56,6 @@ class DishDetail extends Component{
   constructor(props){
     super(props);
     this.toggleModal = this.toggleModal.bind(this);
-
     this.state = {
       isModalOpen: false
   };
@@ -75,7 +74,7 @@ class DishDetail extends Component{
       <Modal className="" isOpen={this.state.isModalOpen}  toggle={this.toggleModal}>
         <ModalHeader toggle={this.toggleModal}>Submit Comments</ModalHeader>
         <ModalBody>
-          <CommentsForm/>
+          <CommentsForm addComment={this.props.addComment} dishId={this.props.dish.id}/>
         </ModalBody>
       </Modal>
 
