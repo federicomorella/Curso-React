@@ -3,10 +3,34 @@ import { Card,CardBody,CardImg,CardTitle,CardText, Breadcrumb, BreadcrumbItem,Mo
 import { Link } from 'react-router-dom';
 import { render } from "@testing-library/react";
 import CommentsForm from "./CommentsForm"; 
-
-
-function RenderDish({dish}){
-  if(dish!=null){
+import { Loading } from './LoadingComponent';
+/*
+props={
+  dish 
+  isLoading,
+  errMess}
+*/
+function RenderDish({dish,isLoading,errMess}){
+  if (isLoading) {
+    return(
+        <div className="container">
+            <div className="row">            
+                <Loading />
+            </div>
+        </div>
+    );
+  }
+  else if (errMess) {
+      return(
+          <div className="container">
+              <div className="row">            
+                  <h4>{errMess}</h4>
+              </div>
+          </div>
+      );
+  }
+  
+  else if(dish!=null){
     return(
       <Card>
         <CardImg src={dish.image} alt={dish.name}/>
@@ -51,7 +75,15 @@ function RenderComments({comments}){
   }
 
 }
-
+/*
+props={
+  dish 
+  isLoading,
+  errMess,
+  comments,
+  addComment
+}
+*/
 class DishDetail extends Component{
   constructor(props){
     super(props);
@@ -80,7 +112,6 @@ class DishDetail extends Component{
 
       <div className="row">
           <Breadcrumb>
-
               <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
               <BreadcrumbItem active>{this.props.dish.name}</BreadcrumbItem>
           </Breadcrumb>
@@ -91,7 +122,10 @@ class DishDetail extends Component{
       </div>
       <div className="row">
           <div className="col-12 col-md-5 m-1">
-              <RenderDish dish={this.props.dish} />
+              <RenderDish 
+                dish={this.props.dish} 
+                isLoading={this.props.isLoading}
+                errMess={this.props.errMess}/>
           </div>
           <div className="col-12 col-md-5 m-1">
               <RenderComments comments={this.props.comments} />
