@@ -1,7 +1,6 @@
 import { Component } from "react";
-import { Control, LocalForm, Errors } from 'react-redux-form';
 import {Row,Col,Label,Button} from 'reactstrap';
-
+import { Control, LocalForm, Errors } from 'react-redux-form';
 
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -19,7 +18,7 @@ class CommentsForm extends Component{
         console.log("DishID: " + this.props.dishId)
         console.log("addComment: " + this.props.addComment)
         this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
-        
+        this.props.resetFeedbackForm();
     }
 
 
