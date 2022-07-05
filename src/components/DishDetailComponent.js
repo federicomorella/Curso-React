@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { render } from "@testing-library/react";
 import CommentsForm from "./CommentsForm"; 
 import { Loading } from './LoadingComponent';
+import {baseUrl} from '../shared/baseUrl'
+
 /*
 props={
   dish 
@@ -31,9 +33,10 @@ function RenderDish({dish,isLoading,errMess}){
   }
   
   else if(dish!=null){
+    console.log(dish);
     return(
       <Card>
-        <CardImg src={dish.image} alt={dish.name}/>
+        <CardImg src={baseUrl + dish.image} alt={dish.name}/>
           <CardBody>
             <CardTitle>{dish.name}</CardTitle>
             <CardText>{dish.description}</CardText>
@@ -81,6 +84,7 @@ props={
   isLoading,
   errMess,
   comments,
+  commentsErrMess
   addComment
 }
 */
@@ -128,7 +132,8 @@ class DishDetail extends Component{
                 errMess={this.props.errMess}/>
           </div>
           <div className="col-12 col-md-5 m-1">
-              <RenderComments comments={this.props.comments} />
+              <RenderComments comments={this.props.comments} 
+              ErrMess={this.props.commentsErrMess}/>
               <Button outline onClick={this.toggleModal}><span className="fa fa-solid fa-pencil fa-lg"></span> Submit Comment</Button>
           </div>
       </div>

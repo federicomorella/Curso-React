@@ -21,7 +21,7 @@ export const ConfigureStore = () => {
                 feedback:InitialFeedback //crea un formulario llamado feedback
             })
         }) ,
-        applyMiddleware(thunk, logger)
+        applyMiddleware(thunk, logger)//log de acciones y estados
     );
 
     return store;

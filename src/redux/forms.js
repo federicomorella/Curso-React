@@ -1,3 +1,4 @@
+//modelo para react-redux-form
 export const InitialFeedback = {
     firstname: '',
     lastname: '',

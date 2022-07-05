@@ -1,0 +1,1 @@
+export const baseUrl='http://localhost:3001/'; //url del json-server que devuelve la informacion para la pagina
