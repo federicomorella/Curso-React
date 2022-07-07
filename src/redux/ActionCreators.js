@@ -66,6 +66,43 @@ export const fetchComments = () => (dispatch) => {
     .catch(error => dispatch(commentsFailed(error.message)));
 }
 
+export const postComment = (dishId, rating, author, comment) => (dispatch) => { //postea un comentario. 
+  const newComment = {
+    dishId: dishId,
+    rating: rating,
+    author: author,
+    comment: comment
+};
+newComment.date = new Date().toISOString();
+console.log("new comment");
+console.log(newComment);
+
+  return fetch(baseUrl + 'comments', {
+      method: "POST",
+      body: JSON.stringify(newComment),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "same-origin"
+    })
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
+    .then(response=>response.json())
+    .then(comment=>dispatch(addComment(comment))) //si la respuesta es satisfactoria, el servidor devuelve el comentario con el ID asi que mando la respuesta a addComent()
+    .catch(error =>  { console.log('post comments', error.message); alert('Your comment could not be posted\nError: '+error.message); });
+}
+
 export const addComments=(comments)=>({
     type:ActionTypes.ADD_COMMENTS,
     payload:comments
@@ -77,16 +114,10 @@ export const commentsFailed = (errmess) => ({
 });
 
 //accion para agregar comentario. Type define que reducer usar y payload es el dato que se le pasa al reducer.
-export const addComment = (dishId, rating, author, comment) => ({
-    type: ActionTypes.ADD_COMMENT,
-    payload: {
-        dishId: dishId,
-        rating: rating,
-        author: author,
-        comment: comment
-    }
+export const addComment = (comment) => ({
+  type: ActionTypes.ADD_COMMENT,
+  payload: comment
 });
-
 
 
 /**********************Promos Actions****************************/

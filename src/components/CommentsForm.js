@@ -15,9 +15,7 @@ class CommentsForm extends Component{
 
     handleSubmit(values) {
         console.log('Current State is: ' + JSON.stringify(values));
-        console.log("DishID: " + this.props.dishId)
-        console.log("addComment: " + this.props.addComment)
-        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
         this.props.resetFeedbackForm();
     }
 

@@ -85,7 +85,8 @@ props={
   errMess,
   comments,
   commentsErrMess
-  addComment
+  postComment
+  resetFeedbackForm
 }
 */
 class DishDetail extends Component{
@@ -110,7 +111,7 @@ class DishDetail extends Component{
       <Modal className="" isOpen={this.state.isModalOpen}  toggle={this.toggleModal}>
         <ModalHeader toggle={this.toggleModal}>Submit Comments</ModalHeader>
         <ModalBody>
-          <CommentsForm addComment={this.props.addComment} dishId={this.props.dish.id}/>
+          <CommentsForm resetFeedbackForm={this.props.resetFeedbackForm} postComment={this.props.postComment} dishId={this.props.dish.id}/>
         </ModalBody>
       </Modal>
 
