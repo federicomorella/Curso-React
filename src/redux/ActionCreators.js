@@ -66,6 +66,7 @@ export const fetchComments = () => (dispatch) => {
     .catch(error => dispatch(commentsFailed(error.message)));
 }
 
+//post comment to the server and get new comment with it's id
 export const postComment = (dishId, rating, author, comment) => (dispatch) => { //postea un comentario. 
   const newComment = {
     dishId: dishId,
