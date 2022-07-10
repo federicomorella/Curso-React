@@ -6,6 +6,7 @@ import CommentsForm from "./CommentsForm";
 import { Loading } from './LoadingComponent';
 import {baseUrl} from '../shared/baseUrl'
 
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 /*
 props={
   dish 
@@ -35,13 +36,21 @@ function RenderDish({dish,isLoading,errMess}){
   else if(dish!=null){
     console.log(dish);
     return(
-      <Card>
+      <FadeTransform
+      in
+      transformProps={{
+          exitTransform: 'scale(0.5) translateY(-50%)'
+      }}>
+        <Card>
         <CardImg src={baseUrl + dish.image} alt={dish.name}/>
           <CardBody>
             <CardTitle>{dish.name}</CardTitle>
             <CardText>{dish.description}</CardText>
           </CardBody>       
         </Card>
+      </FadeTransform>
+
+      
     );
   }
   else{
